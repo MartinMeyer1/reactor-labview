@@ -4,7 +4,23 @@ import re
 
 
 def get_temps():
-    return AdamConnector().get_temps()[0]
+    return AdamConnector().get_temps()
+
+
+def get_inputs():
+    return AdamConnector().get_inputs()
+
+
+def get_relays():
+    return AdamConnector().get_relays()
+
+
+def set_relay(ch, state):
+    AdamConnector().set_relay(ch, state)
+
+
+def set_output(ch, value):
+    AdamConnector().set_output(ch, value)
 
 
 class AdamConnector:
