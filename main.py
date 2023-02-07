@@ -2,7 +2,7 @@ from AdamConnector import AdamConnector
 import time
 
 if __name__ == '__main__':
-    adam = AdamConnector()
+    adam = AdamConnector(port='/dev/cu.usbserial-A10NAKJG')
     adam.set_output(0, 0.69)
     adam.set_output(1, 2)
     adam.set_output(2, 3)
