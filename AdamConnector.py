@@ -106,7 +106,7 @@ class AdamConnector:
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.relay_slot) + "1" + str(
                         ch) + '0' + val + "\r\n").encode())
-                time.sleep(0.1)
+                time.sleep(0.01)
         except serial.SerialException as e:
             print("Error opening or communicating with the serial port:", e)
 
@@ -116,6 +116,6 @@ class AdamConnector:
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.output_slot) + "C" + str(
                         ch) + "{:06.3f}".format(value) + "\r\n").encode())
-                time.sleep(0.1)
+                time.sleep(0.01)
         except serial.SerialException as e:
             print("Error opening or communicating with the serial port:", e)

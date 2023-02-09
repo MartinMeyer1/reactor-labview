@@ -29,4 +29,4 @@ class KS90Connector:
 
         time.sleep(0.4)
 
-        return float_val
+        return round(float_val, 1)
