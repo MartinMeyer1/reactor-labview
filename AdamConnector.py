@@ -25,7 +25,7 @@ def set_output(ch, value):
 
 class AdamConnector:
 
-    def __init__(self, port='COM3', address=1, temp_slot=0, relay_slot=1, input_slot=2,
+    def __init__(self, port='COM3', address=2, temp_slot=0, relay_slot=1, input_slot=2,
                  output_slot=3):
         self.address = address
         self.temp_slot = temp_slot
