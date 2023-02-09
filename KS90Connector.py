@@ -1,5 +1,6 @@
 from pymodbus.client import ModbusSerialClient as ModbusClient
 import struct
+import time
 
 
 def get_temp():
@@ -25,5 +26,7 @@ class KS90Connector:
 
         # Close the connection
         client.close()
+
+        time.sleep(0.4)
 
         return float_val
