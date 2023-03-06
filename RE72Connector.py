@@ -4,11 +4,11 @@ import time
 
 
 def get_temp():
-    return KS90Connector().read_temp()
+    return RE72Connector().read_temp()
 
 
-class KS90Connector:
-    def __init__(self, port='COM3', address=1):
+class RE72Connector:
+    def __init__(self, port='COM3', address=3):
         self.address = address
         self.port = port
 
@@ -18,7 +18,7 @@ class KS90Connector:
         client.connect()
 
         # Read the register
-        result = client.read_holding_registers(35112, 2, self.address)
+        result = client.read_holding_registers(7000, 2, self.address)
 
         # Convert result to float
         byte_data = struct.pack("!HH", result.registers[0], result.registers[1])
