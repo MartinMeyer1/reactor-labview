@@ -7,6 +7,12 @@ import time
 
 def read_ks_re():
     return ModbusConnector().read_ks_re()
+    
+def write_ks_sp(sp):
+    ModbusConnector().write_ks_sp(sp)
+    
+def write_re_sp(sp):
+    ModbusConnector().write_re_sp(sp)    
 
 
 class ModbusConnector:
@@ -37,20 +43,15 @@ class ModbusConnector:
         byte_data = struct.pack("!HH", result.registers[0], result.registers[1])
         float_val_re = struct.unpack('>f', byte_data)[0]
 
-        # Close the connection
-        client.close()
-
         # read KS output status
         result = client.read_holding_registers(4380, 1, self.address_ks)
         decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Big, wordorder=Endian.Little)
         out_ks = float(decoder.decode_16bit_uint())
-        print(out_ks)
 
         # read KS setpoint
         result = client.read_holding_registers(3180, 1, self.address_ks)
         decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Big, wordorder=Endian.Little)
         sp_ks = float(decoder.decode_16bit_int())
-        print(sp_ks)
 
         # read RE setpoint
         result = client.read_holding_registers(4084, 1, self.address_re)
@@ -62,9 +63,12 @@ class ModbusConnector:
         decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Big, wordorder=Endian.Little)
         out_re = float(decoder.decode_16bit_uint()) / 10
         if out_re > 50.0:
-            out_re = 1
+            out_re = 1.0
         else:
-            out_re = 0
+            out_re = 0.0
+
+        # Close the connection
+        client.close()
 
         time.sleep(0.4)
 
