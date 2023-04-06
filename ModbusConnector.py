@@ -5,8 +5,8 @@ import struct
 import time
 
 
-def get_temps():
-    return ModbusConnector().read_temps()
+def read_ks_re():
+    return ModbusConnector().read_ks_re()
 
 
 class ModbusConnector:
@@ -15,7 +15,7 @@ class ModbusConnector:
         self.address_re = address_re
         self.port = port
 
-    def read_temps(self):
+    def read_ks_re(self):
         # Connection to the modbus client
         client = ModbusClient(method="rtu", port=self.port, stopbits=1, bytesize=8, parity='E', baudrate=9600)
         client.connect()
