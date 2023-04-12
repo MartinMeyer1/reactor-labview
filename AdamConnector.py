@@ -44,7 +44,7 @@ class AdamConnector:
         try:
             with serial.Serial(port=self.port) as ser:
                 ser.write(
-                    ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(slot) + "\r\n").encode())
+                    ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(slot) + "\r").encode())
                 time.sleep(0.1)
                 out = ''
                 while ser.inWaiting() > 0:
@@ -70,7 +70,7 @@ class AdamConnector:
         try:
             with serial.Serial(port=self.port) as ser:
                 ser.write(
-                    ("$" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.relay_slot) + "6\r\n").encode())
+                    ("$" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.relay_slot) + "6\r").encode())
                 time.sleep(0.1)
                 response = ''
                 while ser.inWaiting() > 0:
@@ -105,7 +105,7 @@ class AdamConnector:
                     val = '1'
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.relay_slot) + "1" + str(
-                        ch) + '0' + val + "\r\n").encode())
+                        ch) + '0' + val + "\r").encode())
                 time.sleep(0.01)
         except serial.SerialException as e:
             print("Error opening or communicating with the serial port:", e)
@@ -115,7 +115,7 @@ class AdamConnector:
             with serial.Serial(port=self.port) as ser:
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.output_slot) + "C" + str(
-                        ch) + "{:06.3f}".format(value) + "\r\n").encode())
+                        ch) + "{:06.3f}".format(value) + "\r").encode())
                 time.sleep(0.01)
         except serial.SerialException as e:
             print("Error opening or communicating with the serial port:", e)
