@@ -1,4 +1,7 @@
 ## Installation procedure
+
+**Works on Windows only**
+
 - Install labview 32 bits
 - Install python **`v3.9.x`** 32 bits
 
