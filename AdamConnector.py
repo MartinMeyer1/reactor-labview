@@ -42,7 +42,7 @@ class AdamConnector:
 
     def _get_analogs(self, slot):
         try:
-            with serial.Serial(port=self.port) as ser:
+            with serial.Serial(port=self.port, timeout=1) as ser:
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(slot) + "\r").encode())
                 time.sleep(0.1)
@@ -68,7 +68,7 @@ class AdamConnector:
 
     def get_relays(self):
         try:
-            with serial.Serial(port=self.port) as ser:
+            with serial.Serial(port=self.port, timeout=1) as ser:
                 ser.write(
                     ("$" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.relay_slot) + "6\r").encode())
                 time.sleep(0.1)
@@ -99,7 +99,7 @@ class AdamConnector:
 
     def set_relay(self, ch, state):
         try:
-            with serial.Serial(port=self.port) as ser:
+            with serial.Serial(port=self.port, timeout=1) as ser:
                 val = '0'
                 if state is True:
                     val = '1'
@@ -112,7 +112,7 @@ class AdamConnector:
 
     def set_output(self, ch, value):
         try:
-            with serial.Serial(port=self.port) as ser:
+            with serial.Serial(port=self.port, timeout=1) as ser:
                 ser.write(
                     ("#" + "{:02d}".format(self.address) + "S" + "{:01d}".format(self.output_slot) + "C" + str(
                         ch) + "{:06.3f}".format(value) + "\r").encode())
